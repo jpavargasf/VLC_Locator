@@ -1,0 +1,143 @@
+# =========================
+# Visual Studio
+# =========================
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+*.cache
+*.ncb
+*.sdf
+*.ipch/
+*.dbmdl
+*.psess
+*.vsp
+*.vspscc
+*.vssscc
+*.pdb
+*.ilk
+*.log
+*.tlog/
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+
+# Build results
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+x64/
+x86/
+
+# =========================
+# Code::Blocks
+# =========================
+*.depend
+*.layout
+*.layout.save
+*.cbTemp
+*.cbp.*
+*.autosave
+*.o
+*.exe
+*.obj
+
+# Code::Blocks build folders (if used)
+bin/
+obj/
+
+# =========================
+# Android Studio
+# =========================
+.gradle/
+.idea/
+*.iml
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+*.log
+*.apk
+*.ap_
+
+# Keystore files (segurança!)
+*.jks
+*.keystore
+
+# =========================
+# Code Composer Studio
+# =========================
+*.launches
+*.ccxml
+*.project
+*.cproject
+*.cdtproject
+*.log
+*.map
+*.out
+*.hex
+*.bin
+*.a
+*.lib
+*.obj
+*.lst
+Debug/
+Release/
+.settings/
+.metadata/
+workspace/
+
+# CCS-generated files
+*.mk
+*.cmd
+*.pp
+*.d
+*.dep
+*.opt
+
+# =========================
+# Java (geral)
+# =========================
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.swp
+
+# IntelliJ IDEA / Eclipse (caso use)
+*.iml
+*.ipr
+*.iws
+.idea/
+.project
+.classpath
+.settings/
+
+# Maven / Gradle
+target/
+out/
+build/
+
+# =========================
+# Sistema Operacional
+# =========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# =========================
+# Git
+# =========================
+*.orig
+*.rej
+*~

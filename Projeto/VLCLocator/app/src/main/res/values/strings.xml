@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">VLC Locator</string>
+
+    <string name="backgroundThreadName">VLCLocalizatorBackgroundThread</string>
+
+    <string name="camera_permission_denied">Permissão para acessar a câmera negada</string>
+    <string name="storage_permission_denied">Permissão para gravar imagens negada</string>
+
+    <string name="camera_permission_needed">Permissão para acessar a câmera necessária</string>
+    <string name="storage_permission_needed">Permissão para gravar imagens necessária</string>
+
+    <string name="settings">Configurações</string>
+    <string name="capture_photo">Capturar Foto</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="specifications">Especificações</string>
+    <string name="next_camera">Próxima Câmera</string>
+    <string name="change_shutter_speed">Velocidade de Shutter</string>
+    <string name="multiplication_factor">Fator de Multiplicação</string>
+    <string name="multiplication_factor_description">Valor empírico que representa a razão da
+        frequência real para a medida pelo celular, variando de acordo com o shutter speed \n\n
+        Valor Atual: </string>
+    <string name="ip_server">IPv4 do Servidor</string>
+    <string name="ip_server_description">Defina o IPv4 do servidor, ou insira um valor inválido
+        para ter a busca automática\n\nAtual: </string>
+
+    <string name="display_resolution">Resolução do display</string>
+    <string name="processing_resolution">Resolução do Processamento de Imagem</string>
+
+    <string name="change_mode_pnp">Trocar Modo PnP</string>
+    <string name="change_mode_pnp_description">DLT = P6P\nGrunert = P4P\nAtual = </string>
+
+    <string name="change_image_processing_method">Método de Processamento de Imagem</string>
+    <string name="change_image_processing_method_description">Trocar o método de processamento de
+        imagem.\nSe utiliza Filtro Passa Baixa ou Dilatação\nAtual = </string>
+
+    <string name="close">Fechar</string>
+    <string name="save">Salvar</string>
+
+    <string name="current">Atual</string>
+    <string name="range">Faixa</string>
+    <string name="default_string">Padrão</string>
+
+    <string name="shutter_zero_value">Insira 0 para retornar ao default</string>
+
+    <string name="invalid_value">Valor inválido!</string>
+
+    <string name="camera_position">Posição Atual da câmera:</string>
+</resources>

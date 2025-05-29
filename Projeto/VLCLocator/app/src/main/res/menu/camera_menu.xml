@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_main_capture_photo"
+        android:title="@string/capture_photo"
+        android:icon="@drawable/baseline_photo_camera_white_24dp"
+        app:showAsAction="always" />
+
+<!--    <item
+        android:id="@+id/menu_main_settings"
+        android:title="@string/settings"/>-->
+
+    <item
+        android:id="@+id/menu_main_change_mode_pnp"
+        android:title="@string/change_mode_pnp"/>
+
+    <item
+        android:id="@+id/menu_main_change_image_processing_method"
+        android:title="@string/change_image_processing_method"/>
+
+    <item
+        android:id="@+id/menu_main_specifications"
+        android:title="@string/specifications"/>
+
+    <item
+        android:id="@+id/menu_main_next_camera"
+        android:title="@string/next_camera"/>
+
+    <item
+        android:id="@+id/menu_main_shutter_speed"
+        android:title="@string/change_shutter_speed"/>
+
+    <item
+        android:id="@+id/menu_main_mult_factor"
+        android:title="@string/multiplication_factor"/>
+<!--
+    <item
+        android:id="@+id/menu_main_display_resolution"
+        android:title="@string/display_resolution"/>
+
+    <item
+        android:id="@+id/menu_main_processing_resolution"
+        android:title="@string/processing_resolution"/>
+-->
+    <item
+        android:id="@+id/menu_main_ip_server"
+        android:title="@string/ip_server"/>
+
+    <!--
+        <item
+            android:id="@+id/cpptest"
+            android:title="C++ Test"/>
+-->
+</menu>

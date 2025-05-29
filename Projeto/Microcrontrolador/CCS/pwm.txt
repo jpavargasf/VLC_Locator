@@ -1,0 +1,148 @@
+
+
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "inc/hw_memmap.h"
+#include "driverlib/debug.h"
+#include "driverlib/gpio.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/systick.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/timer.h"
+#include "driverlib/pin_map.h"
+
+//*****************************************************************************
+//
+// The error routine that is called if the driver library encounters an error.
+//
+//*****************************************************************************
+#ifdef DEBUG
+void
+__error__(char *pcFilename, uint32_t ui32Line)
+{
+    while(1);
+}
+#endif
+
+uint16_t ledFreqDiv;
+//TimerSynchronize
+
+
+//função de atendimento à interrupção do SysTick
+void intSysTick(void){
+    ledFreqDiv++;
+    //ledValue = 1 - ledValue;
+    //GPIOPinWrite(GPIO_PORTN_BASE, GPIO_PIN_0, ledValue);
+
+}
+
+//configura o SysTick, para ter interrupção a cada clockNumber clocks
+void configureSysTick(uint32_t clockNumber, void (*funPtr)(void)){
+    SysTickPeriodSet(clockNumber);
+    SysTickIntEnable();
+    SysTickIntRegister(funPtr);
+    SysTickEnable();
+}
+
+void configureGPIOs(){
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOH);
+
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOH))
+    {
+    }
+
+    GPIOPinTypeGPIOOutput(GPIO_PORTH_BASE, GPIO_PIN_0);
+    GPIOPinTypeGPIOOutput(GPIO_PORTH_BASE, GPIO_PIN_1);
+
+
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOK);
+
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOK))
+    {
+    }
+
+    GPIOPinTypeGPIOOutput(GPIO_PORTK_BASE, GPIO_PIN_6);
+    GPIOPinTypeGPIOOutput(GPIO_PORTK_BASE, GPIO_PIN_7);
+
+}
+
+void flipGPIOBit(uint32_t port_base, uint8_t pins){
+    uint8_t ui8Value = GPIOPinRead(port_base, pins);
+    ui8Value = pins & (~ui8Value);
+    GPIOPinWrite(port_base, pins, ui8Value);
+}
+
+void setupTimersPWM(){
+    ///timer
+    // Enable the peripherals for Timer 0 and GPIO Port D
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_TIMER0));
+
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOD));
+
+    // Configure PB6 as T0CCP0 (Timer 0 Capture/Compare/PWM output)
+    GPIOPinConfigure(GPIO_PD0_T0CCP0);
+    GPIOPinTypeTimer(GPIO_PORTD_BASE, GPIO_PIN_0);
+
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
+
+    TimerLoadSet(TIMER0_BASE, TIMER_A, 60000);
+    TimerMatchSet(TIMER0_BASE, TIMER_A, 60000 / 2);
+
+
+
+
+    TimerEnable(TIMER0_BASE, TIMER_A);
+}
+
+int
+main(void)
+{
+    //volatile uint32_t ui32Loop;
+
+    //cSysCtlClockFreqSet(SYSCTL_OSC_INT, 16000000);
+
+    SysCtlClockFreqSet(SYSCTL_OSC_INT | SYSCTL_USE_PLL | SYSCTL_CFG_VCO_480,
+    120000000);
+
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPION);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPION));
+    GPIOPinTypeGPIOOutput(GPIO_PORTN_BASE, GPIO_PIN_0);
+
+    ///timer
+    // Enable the peripherals for Timer 0 and GPIO Port D
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_TIMER0);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_TIMER0));
+
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
+    while(!SysCtlPeripheralReady(SYSCTL_PERIPH_GPIOD));
+
+    // Configure PB6 as T0CCP0 (Timer 0 Capture/Compare/PWM output)
+    GPIOPinConfigure(GPIO_PD0_T0CCP0);
+    GPIOPinTypeTimer(GPIO_PORTD_BASE, GPIO_PIN_0);
+
+    TimerConfigure(TIMER0_BASE, TIMER_CFG_SPLIT_PAIR | TIMER_CFG_A_PWM);
+
+    TimerLoadSet(TIMER0_BASE, TIMER_A, 60000);
+    TimerMatchSet(TIMER0_BASE, TIMER_A, 30000);
+
+    TimerPrescaleSet(TIMER0_BASE,TIMER_A, 1);
+    TimerPrescaleMatchSet(TIMER0_BASE, TIMER_A, 1);
+
+
+
+    //configureSysTick(16000000, intSysTick);
+
+    ledFreqDiv = 0;
+
+    TimerEnable(TIMER0_BASE, TIMER_A);
+    configureSysTick(2000, intSysTick);
+    while(1){
+        if(ledFreqDiv >= 30000){
+            ledFreqDiv = 0;
+            flipGPIOBit(GPIO_PORTN_BASE, GPIO_PIN_0);
+        }
+    }
+}
