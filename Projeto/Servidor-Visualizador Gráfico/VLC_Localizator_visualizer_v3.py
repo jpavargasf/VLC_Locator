@@ -387,6 +387,14 @@ thread_udp = Thread(target = UDP_Server, daemon = True,
 #-----------------------------------------PLOT------------------------------------------ 
 axisRange = AxisRange(Point(x = -2.5, y = -2.5, z = 0), Point(x = 2.5, y = 2.5, z = 3))
 
+luminarias = []
+luminarias.append(Point(x = -0.15, y = 0.15, z = 0.083))
+luminarias.append(Point(x = 0.45, y = 0.15, z = 0.083))
+luminarias.append(Point(x = 0, y = 0.3, z = 0.013))
+luminarias.append(Point(x = 0, y = 0, z = 0.013))
+luminarias.append(Point(x = 0.3, y = 0, z = 0.013))
+luminarias.append(Point(x = 0.3, y = 0.3, z = 0.013))
+
 
 fig = plt.figure()
 fig.suptitle("VLC Localizator")
@@ -443,6 +451,11 @@ fig.show()
 thread_tcp.start()
 thread_udp.start()
 scatterPoint = [None,None]
+
+for luminaria in luminarias:
+    ax.scatter(luminaria.value[0],luminaria.value[1], luminaria.value[2], color = 'blue')
+    ax2d.scatter(luminaria.value[0],luminaria.value[1], color = 'blue')
+
 #-----------------------------------------LOOP-------------------------------------------
 while True:
     """ if(input("Input:") == 'test'):
